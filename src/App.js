@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import db from "./utils/firebase";
 import { Container, Row, Col } from "react-bootstrap";
 import AddTask from "./components/AddTask/AddTask";
-import Task from "./components/AddTask/GetTask/Task";
+import Task from "./components/Task/Task";
 import "./App.scss";
 
 function App() {
