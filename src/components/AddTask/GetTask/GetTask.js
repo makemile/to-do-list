@@ -17,17 +17,15 @@ const GetTask = () => {
           orderBy("created", "desc")
         );
         querySnapshot.forEach((doc) => {
-        //   console.log(doc.data());
-          let objTask = {
-            name: doc.name,
-            id: doc.id,
-            data: doc.data(),
-          };
-          const newArrayTask = arrayTask.push(objTask);
-          setDataTask(newArrayTask);
+          let id = doc.id;
+          let name = doc.data().name;
+          let object = { id, name };
+
+          arrayTask.push(object);
         });
+        setDataTask(arrayTask);
       } catch (err) {
-        console.throw(err);
+        console.error(err);
       }
     };
 
