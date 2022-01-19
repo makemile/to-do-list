@@ -12,12 +12,12 @@ const AddTask = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    event.target.reset();
     if (!isEmpty(valueInput)) {
       const docRef = await addDoc(collection(db, "task"), {
         name: valueInput,
         completed: false,
       });
+      setValueInput("");
       return docRef;
     } else {
       return false;
@@ -31,6 +31,7 @@ const AddTask = () => {
         type="text"
         onChange={(event) => setValueInput(event.target.value)}
         placeholder="Add task"
+        value={valueInput}
       />
       <Button type="submit">
         <Send />
