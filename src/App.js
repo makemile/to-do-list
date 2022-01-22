@@ -9,6 +9,8 @@ import "./App.scss";
 
 function App() {
   const [dataTask, setDataTask] = useState([]);
+  const [reloadTask, setReloadTask] = useState(false);
+
 
   console.log(dataTask);
 
@@ -33,7 +35,8 @@ function App() {
       }
     };
     getData();
-  }, []);
+    setReloadTask(false);
+  }, [reloadTask]);
 
   return (
     <Container fluid className="app">
@@ -55,7 +58,7 @@ function App() {
         >
           {dataTask.map((dataTask, index) =>
           (
-            <Task key={index} dataTask={dataTask}/>
+            <Task key={index} dataTask={dataTask} />
           )
           )}
         </Col>
@@ -64,7 +67,7 @@ function App() {
           xs={{ span: 10, offset: 1 }}
           md={{ span: 6, offset: 3 }}
         >
-           <AddTask />
+          <AddTask setReloadTask={setReloadTask}/>
         </Col>
       </Row>
     </Container>
