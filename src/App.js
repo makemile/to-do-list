@@ -12,7 +12,7 @@ function App() {
   const [reloadTask, setReloadTask] = useState(false);
 
 
-  console.log(dataTask);
+  console.log(setDataTask);
 
   useEffect(() => {
     const getData = async () => {

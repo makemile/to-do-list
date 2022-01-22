@@ -5,6 +5,7 @@
   &:last-of-type {
     border-bottom: 0;
   }
+
   div {
     svg {
       width: 22px;
@@ -20,6 +21,9 @@
       svg {
         &:hover {
           cursor: pointer;
+          fill: #45da00;
+        }
+        &.completed{
           fill: #45da00;
         }
       }

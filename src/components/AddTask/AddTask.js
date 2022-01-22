@@ -11,6 +11,8 @@ const AddTask = (props) => {
   const{setReloadTask} = props;
   const [valueInput, setValueInput] = useState("");
 
+  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!isEmpty(valueInput)) {
