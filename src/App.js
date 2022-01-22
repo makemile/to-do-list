@@ -1,14 +1,14 @@
 import { collection, getDocs } from "firebase/firestore";
-import { orderBy } from "lodash";
+import { orderBy, size } from "lodash";
 import React, { useEffect, useState } from "react";
 import db from "./utils/firebase";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 import AddTask from "./components/AddTask/AddTask";
 import Task from "./components/Task/Task";
 import "./App.scss";
 
 function App() {
-  const [dataTask, setDataTask] = useState([]);
+  const [dataTask, setDataTask] = useState(null);
   const [reloadTask, setReloadTask] = useState(false);
 
 
@@ -55,19 +55,31 @@ function App() {
           className="to-do-list__list"
           xs={{ span: 10, offset: 1 }}
           md={{ span: 6, offset: 3 }}
-        >
-          {dataTask.map((dataTask, index) =>
+        >{!dataTask ? (
+          <div className="loading">
+            <Spinner animation="border"
+            />
+            <span>Cargando...</span>
+          </div>
+        ) : size(dataTask) === 0 ? (
+          <h3>No hay Tareas...</h3>
+
+
+        ) : (
+          dataTask.map((dataTask, index) =>
           (
             <Task key={index} dataTask={dataTask} />
           )
-          )}
+          )
+        )}
+
         </Col>
         <Col
           className="to-do-list__input"
           xs={{ span: 10, offset: 1 }}
           md={{ span: 6, offset: 3 }}
         >
-          <AddTask setReloadTask={setReloadTask}/>
+          <AddTask setReloadTask={setReloadTask} />
         </Col>
       </Row>
     </Container>
