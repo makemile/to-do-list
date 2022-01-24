@@ -7,8 +7,11 @@ import "firebase/compat/app";
 import db from "../../utils/firebase";
 import { collection, addDoc } from "firebase/firestore";
 
-const AddTask = () => {
+const AddTask = (props) => {
+  const{setReloadTask} = props;
   const [valueInput, setValueInput] = useState("");
+
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,6 +20,7 @@ const AddTask = () => {
         name: valueInput,
         completed: false,
       });
+      setReloadTask(true)
       setValueInput("");
       return docRef;
     } else {
@@ -25,7 +29,7 @@ const AddTask = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="add-task">
+    <Form onSubmit={handleSubmit}  className="add-task">
       <input
         className="add-task__input"
         type="text"
