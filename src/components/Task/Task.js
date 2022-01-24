@@ -2,39 +2,49 @@ import "./Task.scss";
 import { ReactComponent as Check } from "../../asset/check.svg";
 import { ReactComponent as Delete } from "../../asset/delete.svg";
 import db from "../../utils/firebase";
-import { updateDoc, doc } from "firebase/firestore";
+import { updateDoc, doc, deleteDoc } from "firebase/firestore";
 // import { useState } from "react";
 
 const Task = (props) => {
-  const {
-    dataTask
-  } = props;
+  const { task, setReloadTask } = props;
 
+  //completed task//
   const completeTask = async () => {
-
-
     try {
-      const updatecheckTask = doc(db, "task", dataTask.id);
+      const updatecheckTask = doc(db, "task", task.id);
 
       await updateDoc(updatecheckTask, {
-        completed: true,
-        
+        completed: !task.completed,
       });
+      setReloadTask(true);
     } catch (err) {
       console.log(err);
     }
-
+  };
+//deleted task//
+  const deleteTask = async () => {
+    try {
+      const deleteTasks = doc(db, "task", task.id);
+      await deleteDoc(deleteTasks, {
+        delete: !task.delete,
+      });
+      setReloadTask(true);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <div className="task">
       <div>
-        <Check className={dataTask.completed ? "completed" : ""} 
-        onClick={completeTask} />
+        <Check
+          className={task.completed ? "completed" : ""}
+          onClick={completeTask}
+        />
       </div>
-      <p>{dataTask.name}</p>
+      <p>{task.name}</p>
       <div>
-        <Delete />
+        <Delete onClick={deleteTask} />
       </div>
     </div>
   );

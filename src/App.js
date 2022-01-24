@@ -8,11 +8,11 @@ import Task from "./components/Task/Task";
 import "./App.scss";
 
 function App() {
-  const [dataTask, setDataTask] = useState(null);
+  const [task, setTask] = useState(null);
   const [reloadTask, setReloadTask] = useState(false);
 
 
-  console.log(setDataTask);
+  console.log(task);
 
   useEffect(() => {
     const getData = async () => {
@@ -29,7 +29,7 @@ function App() {
 
           arrayTask.push(object);
         });
-        setDataTask(arrayTask);
+        setTask(arrayTask);
       } catch (err) {
         console.error(err);
       }
@@ -55,20 +55,20 @@ function App() {
           className="to-do-list__list"
           xs={{ span: 10, offset: 1 }}
           md={{ span: 6, offset: 3 }}
-        >{!dataTask ? (
+        >{!task ? (
           <div className="loading">
             <Spinner animation="border"
             />
             <span>Cargando...</span>
           </div>
-        ) : size(dataTask) === 0 ? (
+        ) : size(task) === 0 ? (
           <h3>No hay Tareas...</h3>
 
 
         ) : (
-          dataTask.map((dataTask, index) =>
+          task.map((task, index) =>
           (
-            <Task key={index} dataTask={dataTask} />
+            <Task key={index} task={task} setReloadTask={setReloadTask}/>
           )
           )
         )}
