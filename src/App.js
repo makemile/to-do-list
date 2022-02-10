@@ -9,6 +9,7 @@ import "./App.scss";
 
 function App() {
   const [task, setTask] = useState(null);
+  console.log(task)
   const [reloadTask, setReloadTask] = useState(false);
 
 

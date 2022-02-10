@@ -7,6 +7,7 @@ import { updateDoc, doc, deleteDoc } from "firebase/firestore";
 
 const Task = (props) => {
   const { task, setReloadTask } = props;
+  console.log(task)
 
   //completed task//
   const completeTask = async () => {
